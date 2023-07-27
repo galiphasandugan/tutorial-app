@@ -3,7 +3,7 @@ import { AiFillDelete } from "react-icons/ai"
 import axios from "axios"
 
 import { useState } from "react"
-import  Modal  from "./Modal"
+import  EditTutorial  from "./EditTutorial"
 
 const TutorialList = ({ tutorials, getTutorials }) => {
   const [editItem, setEditItem] = useState("")
@@ -32,6 +32,14 @@ const TutorialList = ({ tutorials, getTutorials }) => {
   const handleDelete = async (id) => {
     try {
       await axios.delete(`${BASE_URL}/${id}/`)
+    } catch (error) {
+      console.log(error)
+    }
+    getTutorials()
+  }
+  const editTutor = async (tutor) => {
+    try {
+      await axios.delete(`${BASE_URL}/${tutor.id}/`,tutor)
     } catch (error) {
       console.log(error)
     }
@@ -67,7 +75,16 @@ const TutorialList = ({ tutorials, getTutorials }) => {
                     type="button"
                     className="me-2 text-warning"
                     data-bs-toggle="modal" 
-        data-bs-target="#exampleModal"
+                    data-bs-target="#exampleModal"
+                    // onClick={()=>editTutor({
+                    //   id:2632,
+                    //   title:"react",
+                    //   description:"JS lİBRARY",
+                    // })}
+
+                  onClick={()=>setEditItem()}
+
+
                   />
                   <AiFillDelete
                     size={22}
@@ -82,7 +99,7 @@ const TutorialList = ({ tutorials, getTutorials }) => {
         </tbody>
       </table>
 
-     <Modal/>
+     <EditTutorial editItem={editItem} />
     </div>
   );
 }
