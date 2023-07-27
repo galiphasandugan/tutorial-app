@@ -1,8 +1,9 @@
 import { FaEdit } from "react-icons/fa"
 import { AiFillDelete } from "react-icons/ai"
 import axios from "axios"
-import EditTutorial from "./EditTutorial"
+
 import { useState } from "react"
+import  Modal  from "./Modal"
 
 const TutorialList = ({ tutorials, getTutorials }) => {
   const [editItem, setEditItem] = useState("")
@@ -26,17 +27,16 @@ const TutorialList = ({ tutorials, getTutorials }) => {
   //   },
   // ]
   
-  const handleDelete = async (id) => {
+  const BASE_URL = "https://tutorial-api.fullstack.clarusway.com/tutorials"
 
-   const BASE_URL = "https://tutorial-api.fullstack.clarusway.com/tutorials"
-  
-  try {
-    await axios.delete(`${BASE_URL}/${id}/`)
-  } catch (error) {
-    console.log(error)
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`${BASE_URL}/${id}/`)
+    } catch (error) {
+      console.log(error)
+    }
+    getTutorials()
   }
-  getTutorials()
- }
 
 
 
@@ -66,23 +66,14 @@ const TutorialList = ({ tutorials, getTutorials }) => {
                     size={20}
                     type="button"
                     className="me-2 text-warning"
-                    data-bs-toggle="modal"
-                    data-bs-target="#open-modal"
-                    // onClick={() =>
-                    //   editTutor({
-                    //     id: 1934,
-                    //     title: "REACT",
-                    //     description: "JS Library",
-                    //   })
-                    // }
-
-                    onClick={() => setEditItem(item)}
+                    data-bs-toggle="modal" 
+        data-bs-target="#exampleModal"
                   />
                   <AiFillDelete
                     size={22}
                     type="button"
                     className="text-danger "
-                    onClick={()=>handleDelete()}
+                    onClick={()=>handleDelete(id)}
                   />
                 </td>
               </tr>
@@ -91,7 +82,7 @@ const TutorialList = ({ tutorials, getTutorials }) => {
         </tbody>
       </table>
 
-      <EditTutorial editItem={editItem} getTutorials={getTutorials} />
+     <Modal/>
     </div>
   );
 }
