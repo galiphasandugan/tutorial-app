@@ -1,6 +1,7 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 
-const EditTutorial = ({editItem}) => {
+const EditTutorial = ({editItem,getTutorials}) => {
 
 const{id, description:oldDescription, title:oldTitle} =editItem
 
@@ -14,6 +15,23 @@ const{id, description:oldDescription, title:oldTitle} =editItem
     setDescription(oldDescription)
   }, [oldTitle, oldDescription])
   
+
+  const editTutor = async (tutor) => {
+
+  const BASE_URL = "https://tutorial-api.fullstack.clarusway.com/tutorials"
+
+    try {
+      await axios.delete(`${BASE_URL}/${id}/`,tutor)
+    } catch (error) {
+      console.log(error)
+    }
+    getTutorials()
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    editTutor({title, description})
+  }
   return (
     <div>
       <div
@@ -41,7 +59,7 @@ const{id, description:oldDescription, title:oldTitle} =editItem
               />
             </div>
             <div className="modal-body">
-              <form>
+              <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                   <label htmlFor="title" className="form-label">
                     Title
@@ -71,7 +89,7 @@ const{id, description:oldDescription, title:oldTitle} =editItem
                   />
                 </div>
                 <div className="text-end">
-                  <button type="submit" className= "btn btn-danger mb-4">
+                  <button  data-bs-dismiss="modal" type="submit" className= "btn btn-danger mb-4">
                   Submit
                 </button>
                 </div>

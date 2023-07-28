@@ -37,14 +37,14 @@ const TutorialList = ({ tutorials, getTutorials }) => {
     }
     getTutorials()
   }
-  const editTutor = async (tutor) => {
-    try {
-      await axios.delete(`${BASE_URL}/${tutor.id}/`,tutor)
-    } catch (error) {
-      console.log(error)
-    }
-    getTutorials()
-  }
+  // const editTutor = async (tutor) => {
+  //   try {
+  //     await axios.delete(`${BASE_URL}/${tutor.id}/`,tutor)
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  //   getTutorials()
+  // }
 
 
 
@@ -99,7 +99,7 @@ const TutorialList = ({ tutorials, getTutorials }) => {
         </tbody>
       </table>
 
-     <EditTutorial editItem={editItem} />
+     <EditTutorial editItem={editItem} getTutorials={getTutorials} />
     </div>
   );
 }
