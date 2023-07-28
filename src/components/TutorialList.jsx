@@ -1,9 +1,8 @@
 import { FaEdit } from "react-icons/fa"
 import { AiFillDelete } from "react-icons/ai"
 import axios from "axios"
-
+import EditTutorial from "./EditTutorial"
 import { useState } from "react"
-import  EditTutorial  from "./EditTutorial"
 
 const TutorialList = ({ tutorials, getTutorials }) => {
   const [editItem, setEditItem] = useState("")
@@ -26,7 +25,6 @@ const TutorialList = ({ tutorials, getTutorials }) => {
   //     description: "JS library for UI design",
   //   },
   // ]
-  
   const BASE_URL = "https://tutorial-api.fullstack.clarusway.com/tutorials"
 
   const handleDelete = async (id) => {
@@ -37,16 +35,15 @@ const TutorialList = ({ tutorials, getTutorials }) => {
     }
     getTutorials()
   }
+
   // const editTutor = async (tutor) => {
   //   try {
-  //     await axios.delete(`${BASE_URL}/${tutor.id}/`,tutor)
+  //     await axios.put(`${BASE_URL}/${tutor.id}/`, tutor)
   //   } catch (error) {
   //     console.log(error)
   //   }
   //   getTutorials()
   // }
-
-
 
   return (
     <div className="container mt-4">
@@ -74,23 +71,23 @@ const TutorialList = ({ tutorials, getTutorials }) => {
                     size={20}
                     type="button"
                     className="me-2 text-warning"
-                    data-bs-toggle="modal" 
-                    data-bs-target="#exampleModal"
-                    // onClick={()=>editTutor({
-                    //   id:2632,
-                    //   title:"react",
-                    //   description:"JS lİBRARY",
-                    // })}
+                    data-bs-toggle="modal"
+                    data-bs-target="#open-modal"
+                    // onClick={() =>
+                    //   editTutor({
+                    //     id: 1934,
+                    //     title: "REACT",
+                    //     description: "JS Library",
+                    //   })
+                    // }
 
-                  onClick={()=>setEditItem(item)}
-
-
+                    onClick={() => setEditItem(item)}
                   />
                   <AiFillDelete
                     size={22}
                     type="button"
                     className="text-danger "
-                    onClick={()=>handleDelete(id)}
+                    onClick={() => handleDelete(id)}
                   />
                 </td>
               </tr>
@@ -99,7 +96,7 @@ const TutorialList = ({ tutorials, getTutorials }) => {
         </tbody>
       </table>
 
-     <EditTutorial editItem={editItem} getTutorials={getTutorials} />
+      <EditTutorial editItem={editItem} getTutorials={getTutorials} />
     </div>
   );
 }
