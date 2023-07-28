@@ -82,7 +82,7 @@ const TutorialList = ({ tutorials, getTutorials }) => {
                     //   description:"JS lİBRARY",
                     // })}
 
-                  onClick={()=>setEditItem()}
+                  onClick={()=>setEditItem(item)}
 
 
                   />

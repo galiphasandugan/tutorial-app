@@ -1,12 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const EditTutorial = ({editItem}) => {
 
-const{id, description:newDescription, title:newTitle} =editItem
+const{id, description:oldDescription, title:oldTitle} =editItem
 
-  const [title, setTitle] = useState(newTitle);
-  const [description, setDescription] = useState(newDescription);
+  const [title, setTitle] = useState(oldTitle)
+  const [description, setDescription] = useState(oldDescription);
 
+
+
+  useEffect(() => {
+    setTitle(oldTitle)
+    setDescription(oldDescription)
+  }, [oldTitle, oldDescription])
+  
   return (
     <div>
       <div
